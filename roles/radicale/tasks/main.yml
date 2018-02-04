@@ -1,0 +1,46 @@
+- name: "Create User"
+  user:
+    name: radicale
+
+- name: "Create file structure"
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: radicale
+    group: radicale
+    mode: 0775
+    recurse: yes
+  with_items:
+  - /var/lib/radicale/collections
+  - /home/radicale/.config/radicale
+  - /home/radicale/.config/systemd/user
+
+- name: "Copy config files"
+  copy:
+    src: "{{ item }}"
+    dest: /home/radicale/.config/radicale/
+    owner: radicale
+    mode: 0775
+  with_fileglob:
+  - /home/robin/dgplug/myvm/roles/radicale/files/config/*
+
+- name: "Copy service file"
+  copy:
+    src: /home/robin/dgplug/myvm/roles/radicale/files/radicale.service
+    dest: /etc/systemd/system/radicale.service
+    owner: root
+    mode: 0755
+
+- name: "Intalling Radicale and dependencies"
+  pip:
+    name: "{{ item }}"
+    executable: pip3.6
+  with_items:
+  - radicale
+  - passlib
+  - bcrypt
+
+- name: "Start Radicale"
+  service:
+    name: radicale.service
+    state: started

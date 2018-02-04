@@ -1,0 +1,12 @@
+# The user "admin" can read and write any collection.
+[admin]
+user = admin
+collection = .*
+permission = rw
+
+# Read access for the user "user" to everything.
+[read]
+user = user
+collection = .*
+permission = r
+

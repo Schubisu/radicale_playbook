@@ -1,0 +1,35 @@
+- name: "Installing epel repository and yum packages"
+  yum:
+    pkg: {{ item }}
+    state: installed
+  with_items:
+  - epel-release
+  - yum-utils
+
+- name: "Update packages"
+  yum:
+    name: *
+    state: latest
+    update_cache: yes
+
+- name: "Install Python3 repo"
+  yum:
+    name: https://centos7.iuscommunity.org/ius-release.rpm
+    state: installed
+
+- name: "Install Python3"
+  yum:
+    name: {{ item }}
+  with_items:
+  - python36u
+  - python36u-pip
+  - python36u-devel
+
+- name: "Installing some basic packages"
+  yum:
+    pkg: {{ item }}
+    state: installed
+  with_items:
+  - git
+  - man
+  - python-pip

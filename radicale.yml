@@ -1,0 +1,5 @@
+---
+- hosts: dgplug.myvm
+  user: root
+  roles:
+  - radicale

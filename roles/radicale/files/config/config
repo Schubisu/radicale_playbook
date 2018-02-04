@@ -1,0 +1,15 @@
+[auth]
+type = htpasswd
+htpasswd_filename = /home/radicale/.config/radicale/users
+htpasswd_encryption = bcrypt
+delay = 1
+
+[server]
+hosts = 0.0.0.0:5232
+
+[storage]
+filesystem_folder = /var/lib/radicale/collections
+
+[rights]
+type = from_file
+file = /home/radicale/.config/radicale/rights
