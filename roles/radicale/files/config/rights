@@ -1,12 +1,12 @@
 # The user "admin" can read and write any collection.
 [admin]
-user = admin
+user = author
 collection = .*
 permission = rw
 
 # Read access for the user "user" to everything.
 [read]
-user = user
+user = reader
 collection = .*
 permission = r
 

@@ -1,16 +1,13 @@
 - name: "Installing epel repository and yum packages"
   yum:
-    pkg: {{ item }}
+    pkg: "{{ item }}"
     state: installed
   with_items:
   - epel-release
   - yum-utils
 
 - name: "Update packages"
-  yum:
-    name: *
-    state: latest
-    update_cache: yes
+  yum: name=* state=latest update_cache=yes
 
 - name: "Install Python3 repo"
   yum:
@@ -19,7 +16,7 @@
 
 - name: "Install Python3"
   yum:
-    name: {{ item }}
+    pkg: "{{ item }}"
   with_items:
   - python36u
   - python36u-pip
@@ -27,7 +24,7 @@
 
 - name: "Installing some basic packages"
   yum:
-    pkg: {{ item }}
+    pkg: "{{ item }}"
     state: installed
   with_items:
   - git
